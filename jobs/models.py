@@ -24,9 +24,12 @@ class Job(models.Model):
 
 class Application(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    resume = models.FileField(upload_to='resumes/')
     cover_letter = models.TextField()
     applied_at = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
-        return f"{self.user.username} applied to {self.job.title}"
+        return f"{self.full_name} applied to {self.job.title}"

@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
     
 
 class JobSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
 
     class Meta:
         model = Job
@@ -21,11 +21,11 @@ class JobSerializer(serializers.ModelSerializer):
         return job
 
 
-# class ApplicationSerializer(serializers.ModelSerializer):
-#     job = JobSerializer(read_only=True)
-#     user = serializers.StringRelatedField(read_only=True)
+class ApplicationSerializer(serializers.ModelSerializer):
+    job = serializers.PrimaryKeyRelatedField(queryset=Job.objects.all())
+    user = serializers.StringRelatedField(read_only=True)
     
-#     class Meta:
-#         model = Application
-#         fields = '__all__'
-#         read_only_fields = ('applied_at',)
+    class Meta:
+        model = Application
+        fields = '__all__'
+        read_only_fields = ['applied_at','job']
