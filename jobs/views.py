@@ -53,3 +53,18 @@ class ApplicationsListAPIView(ListAPIView):
         job_id = self.kwargs['job_id']
         return Application.objects.filter(job_id=job_id)
 
+
+# create and list categories
+class CategoryListCreateAPIView(ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
+    permission_classes = [permissions.AllowAny]
+
+
+# Retrieve, update, delete a  category
+class CategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.AllowAny]
