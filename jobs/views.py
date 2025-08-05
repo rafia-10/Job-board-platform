@@ -5,6 +5,8 @@ from rest_framework import permissions,  filters
 from .models import Job, Application, Category
 from .serializers import JobSerializer,  CategorySerializer, ApplicationSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from .permissions import IsAdminUserOrReadOnly
+
 
 class JobListCreateAPIView(ListCreateAPIView):
     queryset = Job.objects.all()
@@ -35,7 +37,7 @@ class ApplicationListCreateAPIView(ListCreateAPIView):
     serializer_class = ApplicationSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['job', 'full_name','email']
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAdminUserOrReadOnly]
 
 
 # Delete, update, retrieve a single application
