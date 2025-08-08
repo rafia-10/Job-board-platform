@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from django.contrib import admin
 from django.urls import path, include
+import os
+import dj_database_url
 
 
 
@@ -31,7 +33,7 @@ SECRET_KEY = 'django-insecure-(fe$g)a3^##dfz3lkk+9=_qzcob#pjx0345_k&dc@36@cg4l&x
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTH_USER_MODEL = 'jobs.CustomUser'  # Use the custom user model
 
 # Application definition
 
@@ -81,21 +83,24 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 
 
 # Database
-
-
 # Use PostgreSQL as the database backend
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jobboard_db',
-        'USER': 'jobuser',
-        'PASSWORD': 'jobpassword',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
 
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=False)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'jobboard_db',
+            'USER': 'jobuser',
+            'PASSWORD': 'jobpassword',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
