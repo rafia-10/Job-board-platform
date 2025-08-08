@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 # Use PostgreSQL as the database backend
 
 
-if os.environ.get('DATABASE_URL'):
+if os.environ.get('DATABASE-URL'):
     DATABASES = {
         'default': dj_database_url.config(conn_max_age=600, ssl_require=False)
     }
