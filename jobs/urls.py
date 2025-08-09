@@ -12,6 +12,7 @@ urlpatterns = [
     path('jobs/<int:job_id>/applications/', ApplicationsListAPIView.as_view(), name='job-applications-list'),
     path('categories/', CategoryListCreateAPIView.as_view(), name='category-list-create'),
     path('categories/<int:pk>/', CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-detail'),
+    
 ]
 
 

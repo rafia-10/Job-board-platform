@@ -19,7 +19,7 @@ class JobListCreateAPIView(ListCreateAPIView):
 class JobRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
-    permission_classes = [IsAdminUserOrReadOnly]
+    permission_classes = [permissions.AllowAny]
 
 # class JobApplicationCreateAPIView(CreateAPIView):
 #     queryset = Application.objects.all()
@@ -44,7 +44,7 @@ class ApplicationListCreateAPIView(ListCreateAPIView):
 class ApplicationRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-    permission_classes = [IsAdminUserOrReadOnly]
+    permission_classes = [permissions.AllowAny]
 
 #List application by job id
 class ApplicationsListAPIView(ListAPIView):
@@ -70,3 +70,4 @@ class CategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
+
