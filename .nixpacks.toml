@@ -1,0 +1,2 @@
+[phases.setup]
+packages = ["libpq", "gcc", "python3", "python3Packages.psycopg2"]
