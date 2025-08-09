@@ -15,8 +15,7 @@ class JobSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     def create(self, validated_data):
-        category_data = validated_data.pop('category')
-        category= Category.objects.create(**category_data)
+        category = validated_data.pop('category')
         job = Job.objects.create(category=category, **validated_data)
         return job
 
