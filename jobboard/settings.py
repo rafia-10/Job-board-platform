@@ -88,9 +88,11 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 
 if os.environ.get('DATABASE_URL'):
     DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600,
-                                          default=os.environ.get('DATABASE_URL'),
-                                          ssl_require=False)
+        'default': dj_database_url.config(
+            default=os.environ['DATABASE_URL'],
+            conn_max_age=600,
+            ssl_require=True  # Supabase needs SSL
+        )
     }
 else:
     DATABASES = {
