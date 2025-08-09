@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-(fe$g)a3^##dfz3lkk+9=_qzcob#pjx0345_k&dc@36@cg4l&x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://job-board-platform-k5yk.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['job-board-platform-k5yk.onrender.com', 'localhost']
 AUTH_USER_MODEL = 'jobs.CustomUser'  # Use the custom user model
 
 # Application definition
