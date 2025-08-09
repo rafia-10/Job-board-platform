@@ -29,7 +29,7 @@ oauthlib==3.2.2
 packaging==25.0
 pexpect==4.9.0
 pillow==10.2.0
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 PyJWT==2.7.0
 pyparsing==3.1.1
 pyrsistent==0.20.0
