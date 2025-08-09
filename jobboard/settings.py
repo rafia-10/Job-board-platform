@@ -88,7 +88,9 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 
 if os.environ.get('DATABASE-URL'):
     DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=False)
+        'default': dj_database_url.config(conn_max_age=600,
+                                          default=os.environ.get('DATABASE-URL'),
+                                          ssl_require=False)
     }
 else:
     DATABASES = {
