@@ -1,2 +1,15 @@
 [phases.setup]
+python_version = "3.12"
 packages = ["libpq", "gcc", "python3", "python3Packages.psycopg2"]
+
+[phases.install]
+commands = [
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[phases.build]
+commands = []
+
+[phases.postActivate]
+commands = []
