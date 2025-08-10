@@ -6,15 +6,27 @@ from .models import Job, Application, Category
 from .serializers import JobSerializer,  CategorySerializer, ApplicationSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .permissions import IsAdminUserOrReadOnly
+from django.db.models import Q
 
 
 class JobListCreateAPIView(ListCreateAPIView):
-    queryset = Job.objects.all()
+    
     serializer_class = JobSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ['category', 'location', 'job_type', 'company']
     permission_classes = [permissions.AllowAny]
 
+    def get_queryset(self):
+        queryset = Job.objects.all()
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) |
+                Q(description__icontains=search_query) |
+                Q(company__icontains=search_query) |
+                Q(location__icontains=search_query)
+            )
+        return queryset
 
 class JobRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
