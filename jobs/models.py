@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.postgres.indexes import GinIndex
 
 
 class CustomUser(AbstractUser):
@@ -44,6 +45,10 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+    class Meta:
+        indexes = [
+            GinIndex(fields=['title', 'description', 'company', 'location']),
+        ]
 
 class Application(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
